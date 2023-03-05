@@ -1,9 +1,9 @@
 import { classNames, defaultConfigValues, defaultValues } from "./config"
 import { ConfigDefaultValues, ConfigWithDefaultsOptional } from "./types"
 
-export class PopupIframe {
+export default class PopupMedia {
   static run(config: ConfigWithDefaultsOptional) {
-    const popupWindow = new PopupIframe(config)
+    const popupWindow = new PopupMedia(config)
     popupWindow.show()
 
     return popupWindow._boxElem

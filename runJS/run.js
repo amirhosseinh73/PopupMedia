@@ -2,18 +2,14 @@
 
 const btn = document.querySelector("button")
 
-console.log("hi")
-
-const btnTestPopupJS = function () {
-  console.log("salam")
-
+const testPopupJS = function () {
   btn?.addEventListener("click", function () {
-    PopupIframe.run({
-      url: video,
+    PopupMedia.run({
+      url: "../medias/video.mp4",
       type: "video",
       title: "popup js test",
     })
   })
 }
 
-btnTestPopupJS()
+testPopupJS()
