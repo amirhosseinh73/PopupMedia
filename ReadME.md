@@ -9,7 +9,7 @@
 3. image
 4. iframe --> can be anything like pdf, url, html, etc.
 
-### Dependecies
+### Dependencies
 
 - this plugin does not need anything. I just use parcel to render typescript.
 
