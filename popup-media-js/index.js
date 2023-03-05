@@ -1,5 +1,6 @@
 "use strict"
 
+import "./assets/css/style.css"
 import { classNames, defaultConfigValues, defaultValues } from "./config"
 
 export default class PopupMedia {
