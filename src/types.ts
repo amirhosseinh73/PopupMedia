@@ -1,0 +1,49 @@
+export interface Config {
+  url: string
+  title?: string
+
+  width: number
+  height: number
+
+  minHeight?: number
+  minWidth?: number
+
+  dir?: "rtl" | "ltr"
+
+  //items
+  hasHeader?: boolean
+  hasLoading?: boolean
+
+  hasBtnClose?: boolean
+  hasBtnFullscreen?: boolean
+  hasBtnHelp?: boolean
+  hasBtnSave?: boolean
+
+  helpEvent?: Function
+  saveEvent?: Function
+
+  type: "video" | "iframe" | "audio" | "image"
+
+  hasAudioControls?: boolean
+  isAudioAutoPlay?: boolean
+
+  hasVideoControls?: boolean
+  isVideoAutoPlay?: boolean
+
+  iconClose?: string
+  iconFullscreen?: string
+  iconHelp?: string
+  iconSave?: string
+
+  isDraggable?: false
+  isResizable?: false
+}
+
+export type ConfigDefaultValues = Pick<Config, keyof Config>
+
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
+
+export type ConfigWithDefaultsOptional = Optional<
+  Config,
+  keyof ConfigDefaultValues
+>

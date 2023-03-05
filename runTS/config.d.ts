@@ -1,0 +1,5 @@
+declare module "*.mp3"
+declare module "*.mp4"
+declare module "*.gif"
+declare module "*.jpg"
+declare module "*.pdf"
