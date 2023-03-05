@@ -27,6 +27,15 @@
   npm i popup-media
   ```
 
+  ```
+  PopupMedia.run({
+    url: "../medias/video.mp4",
+    type: "video",
+    title: "popup js test",
+  })
+
+  ```
+
 - method 2: clone repo
 
   > Run Typescript Plugin
