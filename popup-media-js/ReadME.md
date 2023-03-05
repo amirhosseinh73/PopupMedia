@@ -28,6 +28,8 @@
   ```
 
   ```
+  import PopupMedia from "popup-media"
+
   PopupMedia.run({
     url: "../medias/video.mp4",
     type: "video",
