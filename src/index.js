@@ -320,25 +320,25 @@ class PopupMedia {
 
   get _generateBtnCloseHTML() {
     return `<button id="popup_btn_close" type="button" class="btn-white btn-close-modal">
-              ${this.options.iconClose}
+              <span>${this.options.iconClose}</span>
             </button>`
   }
 
   get _generateFullscreenButtonHTML() {
     return `<button id="popup_btn_fullscreen" type="button" class="btn-outline-white btn-fullscreen" data-action="open">
-              ${this.options.iconFullscreen}
+              <span>${this.options.iconFullscreen}</span>
             </button>`
   }
 
   get _generateHelpButtonHTML() {
     return `<button id="popup_btn_help" type="button" class="btn-outline-white btn-guidance">
-              ${this.options.iconHelp}
+              <span>${this.options.iconHelp}</span>
             </button>`
   }
 
   get _generateSaveButtonHTML() {
     return `<button id="popup_btn_save" type="button" class="btn-outline-white btn-save">
-              ${this.options.iconSave}
+              <span>${this.options.iconSave}</span>
             </button>`
   }
 
