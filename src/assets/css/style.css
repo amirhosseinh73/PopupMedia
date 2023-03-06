@@ -13,6 +13,7 @@
 .popup-media-window * {    
     box-sizing: border-box;
     user-select: none;
+    font-family: sans-serif;
 }
 
 .popup-media-fix-loading {

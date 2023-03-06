@@ -13,6 +13,7 @@
 .popup-media-window * {    
     box-sizing: border-box;
     user-select: none;
+    font-family: sans-serif;
 }
 
 .popup-media-fix-loading {
@@ -112,8 +113,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
+    max-height: 22px;
     overflow: hidden;
     padding: 0;
 }
@@ -126,6 +128,8 @@
     justify-content: center;
     align-items: center;
     font-weight: 900;
+    max-height: 100%;
+    pointer-events: none;
 }
 
 .popup-media-window .btn-outline-white {
@@ -165,7 +169,7 @@
 	transform: rotate(90deg);
 }
 
-.popup-media-window .btn-fullscreen {
+.popup-media-window .btn-fullscreen span {
     padding-bottom: 0.2em;
 }
 
