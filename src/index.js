@@ -45,7 +45,7 @@ const defaultValues = {
 const classNames = {
   hasHeader: "has-header",
   fullscreen: "fullscreen",
-  show: "popup-show",
+  show: "popup-media-show",
   activeBtn: "btn-active",
 }
 
@@ -301,11 +301,11 @@ class PopupMedia {
   }
 
   get _generateLoadingHTML() {
-    return `<div id="popup_fix_loading" class="popup-fix-loading">&nbsp;</div>`
+    return `<div id="popup_fix_loading" class="popup-media-fix-loading">&nbsp;</div>`
   }
 
   get _generateMainBoxHTML() {
-    return `<div id="popup_iframe_box" class="popup-window">
+    return `<div id="popup_iframe_box" class="popup-media-window">
               <div id="popup_body" class="body">
                 ${this._selectPopupTypeHTML[this.options.type]}
               </div>           
@@ -313,7 +313,7 @@ class PopupMedia {
   }
 
   get _generateBoxHeaderHTML() {
-    return `<div id="popup_header" class="popup-window-header" dir="${this.options.dir}">
+    return `<div id="popup_header" class="popup-media-window-header" dir="${this.options.dir}">
               <p class="header-title">${this.options.title}</p>
             </div>`
   }

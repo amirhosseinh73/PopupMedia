@@ -45,6 +45,6 @@ export const defaultValues = {
 export const classNames = {
   hasHeader: "has-header",
   fullscreen: "fullscreen",
-  show: "popup-show",
+  show: "popup-media-show",
   activeBtn: "btn-active",
 }
