@@ -1,5 +1,7 @@
 export interface Config {
   url: string
+  srcdoc?: string
+
   title?: string
 
   width: number
@@ -43,7 +45,4 @@ export type ConfigDefaultValues = Pick<Config, keyof Config>
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>
 
-export type ConfigWithDefaultsOptional = Optional<
-  Config,
-  keyof ConfigDefaultValues
->
+export type ConfigWithDefaultsOptional = Optional<Config, keyof ConfigDefaultValues>

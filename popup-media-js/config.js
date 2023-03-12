@@ -2,6 +2,8 @@
 
 export const defaultConfigValues = {
   url: "",
+  srcdoc: undefined,
+
   title: "",
 
   width: (window.innerWidth * 3) / 4,
@@ -39,7 +41,8 @@ export const defaultConfigValues = {
 }
 
 export const defaultValues = {
-  boxHeightAudio: 80,
+  heightAudio: 80,
+  widthAudio: 500,
 }
 
 export const classNames = {

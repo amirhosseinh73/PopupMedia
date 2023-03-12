@@ -54,10 +54,7 @@ export default class PopupMedia {
     this._boxElem.insertAdjacentHTML("afterbegin", this._generateBoxHeaderHTML)
 
     if (this.options.hasBtnClose) {
-      this._headerElem.insertAdjacentHTML(
-        "beforeend",
-        this._generateBtnCloseHTML
-      )
+      this._headerElem.insertAdjacentHTML("beforeend", this._generateBtnCloseHTML)
     }
 
     if (this.options.hasBtnFullscreen && this.options.type !== "audio") {
@@ -93,21 +90,16 @@ export default class PopupMedia {
     if (this.options.isResizable) this._resizableEvent()
 
     //popup-window style
-    if (
-      this.options.width === window.innerWidth &&
-      this.options.height === window.innerHeight
-    )
+    if (this.options.width === window.innerWidth && this.options.height === window.innerHeight)
       this._boxElem.classList.add(classNames.fullscreen)
 
-    const height =
-      this.options.type === "audio"
-        ? defaultValues.boxHeightAudio
-        : this.options.height
-    const left = (window.innerWidth - this.options.width) / 2
+    const height = this.options.type === "audio" ? defaultValues.heightAudio : this.options.height
+    const width = this.options.type === "audio" ? defaultValues.widthAudio : this.options.width
+    const left = (window.innerWidth - width) / 2
     const top = (window.innerHeight - height) / 2
 
     this._boxElem.style.cssText = `
-          width: ${this.options.width}px;
+          width: ${width}px;
           height: ${height}px;
           left: ${left}px;
           top: ${top}px;
@@ -144,12 +136,8 @@ export default class PopupMedia {
    * @param {String} transition
    * @returns
    */
-  async _addStyleWithTransition(
-    elem = this._boxElem,
-    styleCallBack,
-    transition = "all .3s"
-  ) {
-    return new Promise((resolve) => {
+  async _addStyleWithTransition(elem = this._boxElem, styleCallBack, transition = "all .3s") {
+    return new Promise(resolve => {
       const onTransitionEnd = () => {
         elem.removeEventListener("transitionend", onTransitionEnd)
         return resolve()
@@ -163,7 +151,7 @@ export default class PopupMedia {
       .then(() => {
         elem.style.transition = "unset"
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err)
       })
   }
@@ -173,7 +161,7 @@ export default class PopupMedia {
   }
 
   btnSaveEventHandler() {
-    this._btnSaveElem.addEventListener("click", (e) => {
+    this._btnSaveElem.addEventListener("click", e => {
       const target = e.target
       target.classList.toggle(classNames.activeBtn)
 
@@ -189,7 +177,7 @@ export default class PopupMedia {
   }
 
   btnFullscreenEventHandler() {
-    this._btnFullscreenElem.addEventListener("click", (e) => {
+    this._btnFullscreenElem.addEventListener("click", e => {
       const btn = e.target
       const action = btn.dataset.action
       if (action === "open") this.openFullscreen()
@@ -209,15 +197,13 @@ export default class PopupMedia {
 
   requestOpenFullscreen(selector) {
     if (selector["requestFullscreen"]) selector["requestFullscreen"]()
-    else if (selector["webkitRequestFullscreen"])
-      selector["webkitRequestFullscreen"]() // Safari
+    else if (selector["webkitRequestFullscreen"]) selector["webkitRequestFullscreen"]() // Safari
     else if (selector["msRequestFullscreen"]) selector["msRequestFullscreen"]() // IE11
   }
 
   requestCloseFullscreen() {
     if (document["exitFullscreen"]) document["exitFullscreen"]()
-    else if (document["webkitExitFullscreen"])
-      document["webkitExitFullscreen"]() // Safari
+    else if (document["webkitExitFullscreen"]) document["webkitExitFullscreen"]() // Safari
     else if (document["msExitFullscreen"]) document["msExitFullscreen"]() // IE11
   }
 
@@ -226,8 +212,7 @@ export default class PopupMedia {
       const selector = document.getElementById(id)
 
       if (selector.dataset.action === "open") selector.dataset.action = "close"
-      else if (selector.dataset.action === "close")
-        selector.dataset.action = "open"
+      else if (selector.dataset.action === "close") selector.dataset.action = "open"
     }
   }
 
@@ -239,7 +224,9 @@ export default class PopupMedia {
 
   get _selectPopupTypeHTML() {
     return {
-      iframe: `<iframe src="${this.options.url}" class="box-item"></iframe>`,
+      iframe: `<iframe ${
+        this.options.srcdoc ? `srcdoc='${this.options.srcdoc}'` : `src="${this.options.url}"`
+      } class="box-item"></iframe>`,
       video: `<video src="${this.options.url}" class="box-item" ${
         this.options.hasVideoControls && "controls"
       } ${this.options.isVideoAutoPlay && "autoplay"}>
@@ -259,7 +246,7 @@ export default class PopupMedia {
   }
 
   get _generateMainBoxHTML() {
-    return `<div id="popup_iframe_box" class="popup-media-window">
+    return `<div id="popup_iframe_box" class="popup-media-window" data-type="${this.options.type}">
               <div id="popup_body" class="body">
                 ${this._selectPopupTypeHTML[this.options.type]}
               </div>           

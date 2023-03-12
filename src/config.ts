@@ -2,6 +2,8 @@ import { ConfigDefaultValues } from "./types"
 
 export const defaultConfigValues: ConfigDefaultValues = {
   url: "",
+  srcdoc: undefined,
+
   title: "",
 
   width: (window.innerWidth * 3) / 4,
@@ -39,7 +41,8 @@ export const defaultConfigValues: ConfigDefaultValues = {
 }
 
 export const defaultValues = {
-  boxHeightAudio: 80,
+  heightAudio: 80,
+  widthAudio: 500,
 }
 
 export const classNames = {
