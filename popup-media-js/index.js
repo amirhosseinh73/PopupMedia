@@ -232,9 +232,6 @@ export default class PopupMedia {
 
   _draggableEvent() {
     this._headerElem.addEventListener("mousedown", this._dragStart)
-    document.body.addEventListener("mousemove", this._dragMove)
-    document.body.addEventListener("mouseup", this._dragEnd)
-    document.body.addEventListener("mouseleave", this._dragEnd)
   }
 
   _dragStart = e => {
@@ -244,6 +241,10 @@ export default class PopupMedia {
     this._params.startBoxPosition.X = this._boxElem.offsetLeft
     this._params.startBoxPosition.Y = this._boxElem.offsetTop
     document.body.style.cursor = "move"
+
+    document.body.addEventListener("mousemove", this._dragMove)
+    document.body.addEventListener("mouseup", this._dragEnd)
+    document.body.addEventListener("mouseleave", this._dragEnd)
   }
 
   _dragMove = e => {
@@ -257,6 +258,7 @@ export default class PopupMedia {
   }
 
   _dragEnd = () => {
+    if (!this._params.enableDragging) return
     this._params.enableDragging = false
 
     this._params.startMousePosition.X = 0
@@ -265,6 +267,10 @@ export default class PopupMedia {
     this._rePositionBoxInOutOfWindow()
 
     document.body.style.cursor = ""
+
+    document.body.removeEventListener("mousemove", this._dragMove)
+    document.body.removeEventListener("mouseup", this._dragEnd)
+    document.body.removeEventListener("mouseleave", this._dragEnd)
   }
 
   async _rePositionBoxInOutOfWindow() {
