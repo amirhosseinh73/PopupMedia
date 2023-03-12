@@ -8,6 +8,7 @@ const testPopupJS = function () {
       url: "../medias/video.mp4",
       type: "video",
       title: "popup js test",
+      isDraggable: true,
     })
   })
 }

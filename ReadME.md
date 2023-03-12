@@ -1,4 +1,4 @@
-# Popup JS
+# Popup Media JS
 
 > Play media (image, video, audio, etc) with this small plugin.
 
@@ -91,7 +91,7 @@
 - iconHelp: you can change this icon with HTML
 - iconSave: you can change this icon with HTML
 
-- isDraggable: false, enable this feature on next update
+- isDraggable: true | false, default is false
 - isResizable: false, enable this feature on next update
 
 - minHeight: for resizable popupjs set minHeight, enable this feature on next update

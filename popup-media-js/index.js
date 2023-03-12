@@ -19,6 +19,18 @@ export default class PopupMedia {
     url: "",
   }
 
+  _params = {
+    enableDragging: false,
+    startMousePosition: {
+      X: 0,
+      Y: 0,
+    },
+    startBoxPosition: {
+      X: 0,
+      Y: 0,
+    },
+  }
+
   constructor(config) {
     this.setConfig(config)
   }
@@ -99,11 +111,11 @@ export default class PopupMedia {
     const top = (window.innerHeight - height) / 2
 
     this._boxElem.style.cssText = `
-          width: ${width}px;
-          height: ${height}px;
-          left: ${left}px;
-          top: ${top}px;
-        `
+            width: ${width}px;
+            height: ${height}px;
+            left: ${left}px;
+            top: ${top}px;
+          `
     document.body.offsetWidth // add a delay between append html and add class for transition
     this._boxElem.classList.add(classNames.show)
 
@@ -196,15 +208,17 @@ export default class PopupMedia {
   }
 
   requestOpenFullscreen(selector) {
-    if (selector["requestFullscreen"]) selector["requestFullscreen"]()
-    else if (selector["webkitRequestFullscreen"]) selector["webkitRequestFullscreen"]() // Safari
-    else if (selector["msRequestFullscreen"]) selector["msRequestFullscreen"]() // IE11
+    if (selector.requestFullscreen) selector.requestFullscreen()
+    else if (selector.mozRequestFullScreen) selector.mozRequestFullScreen() // Firefox
+    else if (selector.webkitRequestFullscreen) selector.webkitRequestFullscreen() // Safari
+    else if (selector.msRequestFullscreen) selector.msRequestFullscreen() // IE11
   }
 
   requestCloseFullscreen() {
-    if (document["exitFullscreen"]) document["exitFullscreen"]()
-    else if (document["webkitExitFullscreen"]) document["webkitExitFullscreen"]() // Safari
-    else if (document["msExitFullscreen"]) document["msExitFullscreen"]() // IE11
+    if (document.exitFullscreen) document.exitFullscreen()
+    else if (document.mozCancelFullScreen) document.mozCancelFullScreen() // Firefox
+    else if (document.webkitExitFullscreen) document.webkitExitFullscreen() // Safari
+    else if (document.msExitFullscreen) document.msExitFullscreen() // IE11
   }
 
   fullscreenChangeHandler(id) {
@@ -216,9 +230,74 @@ export default class PopupMedia {
     }
   }
 
-  _rePositionBoxInOutOfWindow() {}
+  _draggableEvent() {
+    this._headerElem.addEventListener("mousedown", this._dragStart)
+    document.body.addEventListener("mousemove", this._dragMove)
+    document.body.addEventListener("mouseup", this._dragEnd)
+    document.body.addEventListener("mouseleave", this._dragEnd)
+  }
 
-  _draggableEvent() {}
+  _dragStart = e => {
+    this._params.enableDragging = true
+    this._params.startMousePosition.X = e.clientX
+    this._params.startMousePosition.Y = e.clientY
+    this._params.startBoxPosition.X = this._boxElem.offsetLeft
+    this._params.startBoxPosition.Y = this._boxElem.offsetTop
+    document.body.style.cursor = "move"
+  }
+
+  _dragMove = e => {
+    if (!this._params.enableDragging) return
+
+    this._boxElem.style.left =
+      this._params.startBoxPosition.X + e.clientX - this._params.startMousePosition.X + "px"
+
+    this._boxElem.style.top =
+      this._params.startBoxPosition.Y + e.clientY - this._params.startMousePosition.Y + "px"
+  }
+
+  _dragEnd = () => {
+    this._params.enableDragging = false
+
+    this._params.startMousePosition.X = 0
+    this._params.startMousePosition.Y = 0
+
+    this._rePositionBoxInOutOfWindow()
+
+    document.body.style.cursor = ""
+  }
+
+  async _rePositionBoxInOutOfWindow() {
+    const box = this._boxElem
+
+    let reposition = false
+
+    let callbackX = () => {}
+    let callbackY = () => {}
+    //X
+    if (box.offsetLeft < 0) {
+      reposition = true
+      callbackX = () => (box.style.left = 0 + "px")
+    } else if (box.offsetLeft + box.offsetWidth > window.innerWidth) {
+      reposition = true
+      callbackX = () => (box.style.left = window.innerWidth - box.offsetWidth + "px")
+    }
+
+    //Y
+    if (box.offsetTop < 0) {
+      reposition = true
+      callbackY = () => (box.style.top = 0 + "px")
+    } else if (box.offsetTop + box.offsetHeight > window.innerHeight) {
+      reposition = true
+      callbackY = () => (box.style.top = window.innerHeight - box.offsetHeight + "px")
+    }
+
+    if (!reposition) return
+    await this._addStyleWithTransition(box, () => {
+      callbackX()
+      callbackY()
+    })
+  }
 
   _resizableEvent() {}
 

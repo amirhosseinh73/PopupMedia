@@ -37,7 +37,7 @@ export interface Config {
   iconHelp?: string
   iconSave?: string
 
-  isDraggable?: false
+  isDraggable?: boolean
   isResizable?: false
 }
 

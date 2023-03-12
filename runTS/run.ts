@@ -12,6 +12,7 @@ const btnTestPopupJS = function () {
       url: video,
       type: "video",
       title: "popup js test",
+      isDraggable: true,
     })
   })
 }
