@@ -55,7 +55,10 @@
     background-color: var(--color-secondary);
     position: fixed;
     z-index: 100;
-    direction: rtl;
+}
+
+.popup-media-window.resizable {
+    resize: both;
 }
 
 .popup-media-window.fullscreen{

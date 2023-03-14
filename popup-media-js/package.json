@@ -1,6 +1,6 @@
 {
   "name": "popup-media",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "A js plugin for load and play media in a beautiful modal",
   "main": "index.js",
   "scripts": {

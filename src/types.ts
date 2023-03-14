@@ -7,9 +7,6 @@ export interface Config {
   width: number
   height: number
 
-  minHeight?: number
-  minWidth?: number
-
   dir?: "rtl" | "ltr"
 
   //items
@@ -38,7 +35,7 @@ export interface Config {
   iconSave?: string
 
   isDraggable?: boolean
-  isResizable?: false
+  isResizable?: boolean
 }
 
 export type ConfigDefaultValues = Pick<Config, keyof Config>

@@ -8,8 +8,6 @@ export const defaultConfigValues = {
 
   width: (window.innerWidth * 3) / 4,
   height: (window.innerHeight * 3) / 4,
-  minHeight: 150,
-  minWidth: 200,
 
   dir: "ltr",
 

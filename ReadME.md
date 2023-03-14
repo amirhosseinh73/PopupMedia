@@ -92,7 +92,4 @@
 - iconSave: you can change this icon with HTML
 
 - isDraggable: true | false, default is false
-- isResizable: false, enable this feature on next update
-
-- minHeight: for resizable popupjs set minHeight, enable this feature on next update
-- minWidth: for resizable popupjs set minWidth, enable this feature on next update
+- isResizable: true | false, default is false

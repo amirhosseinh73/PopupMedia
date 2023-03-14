@@ -23,12 +23,12 @@
   },
   "include": [
     "src/**/*", // *** The files TypeScript should type check ***
-    "runTS/**/*",
-    "src/@Types/global",
-    "src/@Types/lib.dom.d.ts",
-    "src/@Types/dom.ie.d.ts",
-    "src/@Types/dom.moz.d.ts",
-    "src/@Types/dom.webkit.d.ts"
+    "runTS/**/*"
+    // "src/@Types/global",
+    // "src/@Types/lib.dom.d.ts",
+    // "src/@Types/dom.ie.d.ts",
+    // "src/@Types/dom.moz.d.ts",
+    // "src/@Types/dom.webkit.d.ts"
   ],
   "exclude": ["node_modules", "build"] // *** The files to not type check ***
 }

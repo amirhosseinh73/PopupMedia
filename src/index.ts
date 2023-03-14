@@ -307,7 +307,9 @@ export default class PopupMedia {
     })
   }
 
-  _resizableEvent() {}
+  _resizableEvent() {
+    this._boxElem.classList.add("resizable")
+  }
 
   get _selectPopupTypeHTML() {
     return {
