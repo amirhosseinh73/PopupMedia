@@ -93,3 +93,5 @@
 
 - isDraggable: true | false, default is false
 - isResizable: true | false, default is false
+
+- isPlayInBackground: true | false, default is false, If you want play short audios this feature is useful, play media in background and close it automatic after complete

@@ -57,6 +57,11 @@
     z-index: 100;
 }
 
+.popup-media-window.isPlayInBackground {
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
 .popup-media-window.resizable {
     resize: both;
 }

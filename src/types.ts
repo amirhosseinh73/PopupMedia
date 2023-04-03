@@ -36,6 +36,8 @@ export interface Config {
 
   isDraggable?: boolean
   isResizable?: boolean
+
+  isPlayInBackground?: boolean
 }
 
 export type ConfigDefaultValues = Pick<Config, keyof Config>

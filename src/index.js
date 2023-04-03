@@ -36,6 +36,8 @@ const defaultConfigValues = {
   iconFullscreen: "&#x26F6;",
   iconHelp: "&quest;",
   iconSave: "&#128427;",
+
+  isPlayInBackground: false,
 }
 
 const defaultValues = {
@@ -180,6 +182,9 @@ class PopupMedia {
       this.btnFullscreenEventHandler()
 
     if (this.options.hasBtnHelp) this.btnHelpEventHandler()
+
+    //close modal on playInBackground mode
+    if (this.options.isPlayInBackground) this.addEndOfMediaEventHandler()
   }
 
   close() {
@@ -356,6 +361,14 @@ class PopupMedia {
     this._boxElem.classList.add("resizable")
   }
 
+  addEndOfMediaEventHandler() {
+    const container = this._boxElem
+
+    if (!container || (this.options.type !== "audio" && this.options.type !== "video")) return
+
+    container.querySelector(".box-item")?.addEventListener("ended", () => this.close())
+  }
+
   get _selectPopupTypeHTML() {
     return {
       iframe: `<iframe ${
@@ -380,7 +393,9 @@ class PopupMedia {
   }
 
   get _generateMainBoxHTML() {
-    return `<div id="popup_iframe_box" class="popup-media-window" data-type="${this.options.type}">
+    return `<div id="popup_iframe_box" class="popup-media-window ${
+      this.options.isPlayInBackground ? "isPlayInBackground" : ""
+    }" data-type="${this.options.type}">
               <div id="popup_body" class="body">
                 ${this._selectPopupTypeHTML[this.options.type]}
               </div>           

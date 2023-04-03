@@ -36,6 +36,8 @@ export const defaultConfigValues: ConfigDefaultValues = {
   iconFullscreen: "&#x26F6;",
   iconHelp: "&quest;",
   iconSave: "&#128427;",
+
+  isPlayInBackground: false,
 }
 
 export const defaultValues = {
