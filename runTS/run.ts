@@ -14,6 +14,7 @@ const btnTestPopupJS = function () {
       title: "popup js test",
       isDraggable: true,
       isResizable: true,
+      dir: "rtl",
     })
   })
 }

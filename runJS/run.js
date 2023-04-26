@@ -5,11 +5,13 @@ const btn = document.querySelector("button")
 const testPopupJS = function () {
   btn?.addEventListener("click", function () {
     PopupMedia.run({
-      url: "../medias/audio_1660804545_1760.mpeg",
-      type: "video",
+      url: "../medias/pdf.pdf",
+      type: "iframe",
       title: "popup js test",
       isDraggable: true,
-      isPlayInBackground: true,
+      isResizable: true,
+      dir: "rtl",
+      // isPlayInBackground: true,
     })
   })
 }

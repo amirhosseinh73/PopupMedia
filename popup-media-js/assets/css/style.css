@@ -64,6 +64,7 @@
 
 .popup-media-window.resizable {
     resize: both;
+    direction: ltr;
 }
 
 .popup-media-window.fullscreen{
