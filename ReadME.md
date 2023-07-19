@@ -47,7 +47,16 @@
   ```
 
 - method 3: simple use js and css
-  > load **_src/assets_** and **_src/index.js_** in your html
+
+  > load **_src/assets_** and **_src/index.js_** in your html OR copy **_dist_** in your project:
+
+  ```
+  <link rel="stylesheet" type="text/css" href="/popup-media/assets/css/style.css" />
+  <script type="text/javascript" src="/popup-media/index.js"></script>
+  ```
+
+  > for manual Test:
+
   1.  ```
       cd runJS
       ```

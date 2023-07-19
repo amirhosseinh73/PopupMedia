@@ -54,7 +54,7 @@
     overflow: hidden;
     background-color: var(--color-secondary);
     position: fixed;
-    z-index: 100;
+    z-index: 100000;
 }
 
 .popup-media-window.isPlayInBackground {
@@ -136,9 +136,10 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    font-weight: 900;
+    font-weight: 400;
     max-height: 100%;
     pointer-events: none;
+    font-size: 1rem;
 }
 
 .popup-media-window .btn-outline-white {

@@ -32,7 +32,7 @@ export const defaultConfigValues = {
   hasVideoControls: true,
   isVideoAutoPlay: true,
 
-  iconClose: "&times;",
+  iconClose: "&#x2715;",
   iconFullscreen: "&#x26F6;",
   iconHelp: "&quest;",
   iconSave: "&#128427;",
