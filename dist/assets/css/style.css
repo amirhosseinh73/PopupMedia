@@ -13,7 +13,6 @@
 .popup-media-window * {    
     box-sizing: border-box;
     user-select: none;
-    font-family: sans-serif;
 }
 
 .popup-media-fix-loading {
@@ -140,6 +139,7 @@
     max-height: 100%;
     pointer-events: none;
     font-size: 1rem;
+    font-family: sans-serif;
 }
 
 .popup-media-window .btn-outline-white {
