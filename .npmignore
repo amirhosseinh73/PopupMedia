@@ -1,7 +1,2 @@
-.parcel-cache
-dist
+# dist
 node_modules
-runJS
-runTS
-src
-old

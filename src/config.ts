@@ -1,4 +1,7 @@
-import { ConfigDefaultValues } from "./types"
+import { ConfigDefaultValues } from "./@Types/index"
+
+export const defaltWidth = (window.innerWidth * 3) / 4
+export const defaltHeight = (window.innerHeight * 3) / 4
 
 export const defaultConfigValues: ConfigDefaultValues = {
   url: "",
@@ -6,8 +9,8 @@ export const defaultConfigValues: ConfigDefaultValues = {
 
   title: "",
 
-  width: (window.innerWidth * 3) / 4,
-  height: (window.innerHeight * 3) / 4,
+  width: defaltWidth,
+  height: defaltHeight,
 
   dir: "ltr",
 
@@ -22,8 +25,8 @@ export const defaultConfigValues: ConfigDefaultValues = {
   helpEvent: () => {},
   saveEvent: () => {},
 
-  isDraggable: false,
-  isResizable: false,
+  isDraggable: true,
+  isResizable: true,
 
   type: "iframe",
 
@@ -38,6 +41,8 @@ export const defaultConfigValues: ConfigDefaultValues = {
   iconSave: "&#128427;",
 
   isPlayInBackground: false,
+
+  isLoopMode: false,
 }
 
 export const defaultValues = {

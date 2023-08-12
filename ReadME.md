@@ -2,65 +2,68 @@
 
 > Play media (image, video, audio, etc) with this small plugin.
 
-> npm package link: [click](https://www.npmjs.com/package/popup-media)
+npm package link: [click](https://www.npmjs.com/package/popup-media)
 
-> github link: [click](https://github.com/amirhoseinh73/PopupJS)
+github link: [click](https://github.com/amirhoseinh73/PopupJS)
 
 ## Media Types
 
-1. video
-2. audio
-3. image
-4. iframe --> can be anything like pdf, url, html, etc.
+- video: Play Video using HTML5
+- audio: Play Audio using HTML5
+- image: Show Single image using img HTML tag
+- iframe: Show anything, including PDF, URL, image, video, audio, html and etc. in iframe HTML tag
+- gallery: Show multiple image using array, you have to pass image urls in array for gallery mode.
 
 ### Dependencies
 
-- this plugin does not need anything. I just use parcel to render typescript.
+> this plugin does not need anything. I just use typescript to build.
 
-- you can use index.js without parcel like text/javascript.
+### How to use
 
-### Run
+use npm
 
-- method 1: use npm
+```
+npm i popup-media
+```
 
-  ```
-  npm i popup-media
-  ```
+Example 1:
 
-  ```
-  import PopupMedia from "popup-media"
+```
+import PopupMedia from "popup-media"
 
-  PopupMedia.run({
-    url: "../medias/video.mp4",
+const galleryUrls = [
+  "https://plus.unsplash.com/premium_photo-1674671748477-5354897d35c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1887&q=80",
+  "https://images.unsplash.com/photo-1691019807758-3647f75a3154?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80",
+  "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+  "https://images.unsplash.com/photo-1503376780353-7e6692767b70?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+]
+PopupMedia.run({
+  url: galleryUrls,
+  type: "gallery",
+  title: "popup js test",
+  isLoopMode: true,
+})
+
+```
+
+Example 2:
+
+```
+PopupMedia.run({
+    url: "http://techslides.com/demos/sample-videos/small.webm",
     type: "video",
-    title: "popup js test",
   })
+```
 
-  ```
+### TypeScript
 
-- method 2: clone repo
+This plugin supports TypeScript for recognizing types in your application. To enable type recognition, simply add the following lines to your tsconfig.json file:
 
-  > Run Typescript Plugin
-
-  ```
-  npm start
-  ```
-
-- method 3: simple use js and css
-
-  > load **_src/assets_** and **_src/index.js_** in your html OR copy **_dist_** in your project:
-
-  ```
-  <link rel="stylesheet" type="text/css" href="/popup-media/assets/css/style.css" />
-  <script type="text/javascript" src="/popup-media/index.js"></script>
-  ```
-
-  > for manual Test:
-
-  1.  ```
-      cd runJS
-      ```
-  2.  double click on index.html
+```
+"paths": {
+      "popup-media": ["./node_modules/popup-media/dist"]
+    }
+```
 
 ### **Config**
 
@@ -70,7 +73,7 @@
 
 > Optional fields:
 
-- type: "video" | "iframe" | "audio" | "image", default is iframe
+- type: "video" | "iframe" | "audio" | "image" | "gallery", default is iframe
 - title
 - width: width of popup box, default is 3/4 of window width
 - height: height of popup box, default is 3/4 of window height
@@ -100,7 +103,9 @@
 - iconHelp: you can change this icon with HTML
 - iconSave: you can change this icon with HTML
 
-- isDraggable: true | false, default is false
-- isResizable: true | false, default is false
+- isDraggable: true | false, default is true
+- isResizable: true | false, default is true
 
 - isPlayInBackground: true | false, default is false, If you want play short audios this feature is useful, play media in background and close it automatic after complete
+
+- isLoopMode: true | false, this is for gallery type media.

@@ -1,5 +1,7 @@
-import { classNames, defaultConfigValues, defaultValues } from "./config"
-import { ConfigDefaultValues, ConfigWithDefaultsOptional } from "./types"
+import { classNames, defaltHeight, defaltWidth, defaultConfigValues, defaultValues } from "./config"
+import { ConfigDefaultValues, ConfigWithDefaultsOptional } from "./@Types/index"
+
+import "./assets/css/style.css"
 
 export default class PopupMedia {
   static run(config: ConfigWithDefaultsOptional) {
@@ -103,8 +105,18 @@ export default class PopupMedia {
     if (this.options.width === window.innerWidth && this.options.height === window.innerHeight)
       this._boxElem.classList.add(classNames.fullscreen)
 
-    const height = this.options.type === "audio" ? defaultValues.heightAudio : this.options.height
-    const width = this.options.type === "audio" ? defaultValues.widthAudio : this.options.width
+    const width =
+      this.options.type === "audio"
+        ? defaultValues.widthAudio
+        : this.options.width
+        ? this.options.width
+        : defaltWidth
+    const height =
+      this.options.type === "audio"
+        ? defaultValues.heightAudio
+        : this.options.height
+        ? this.options.height
+        : defaltHeight
     const left = (window.innerWidth - width) / 2
     const top = (window.innerHeight - height) / 2
 
@@ -134,6 +146,8 @@ export default class PopupMedia {
 
     //close modal on playInBackground mode
     if (this.options.isPlayInBackground) this.addEndOfMediaEventHandler()
+
+    if (this.options.type === "gallery") this._galleryEventHandler()
   }
 
   close() {
@@ -322,6 +336,50 @@ export default class PopupMedia {
     container.querySelector(".box-item")?.addEventListener("ended", () => this.close())
   }
 
+  _galleryEventHandler() {
+    const btnLeft = document.querySelector(".popup-media-gallery-left")
+    const btnRight = document.querySelector(".popup-media-gallery-right")
+
+    if (!btnLeft || !btnRight) return
+
+    if (!this.options.isLoopMode) btnLeft.setAttribute("disabled", "true")
+
+    const switchImage = (side: "next" | "previous") => {
+      const currentImage = document.querySelector(".popup-media-gallery-images > img.active")
+      if (!currentImage) return
+
+      const nextImage = currentImage[`${side}ElementSibling`]
+
+      if (!nextImage) {
+        if (!this.options.isLoopMode) return
+
+        if (side === "next") {
+          const firstImage = document.querySelector(".popup-media-gallery-images > img:first-child")
+          firstImage?.classList.add("active")
+        } else if (side === "previous") {
+          const lastImage = document.querySelector(".popup-media-gallery-images > img:last-child")
+          lastImage?.classList.add("active")
+        }
+        currentImage.classList.remove("active")
+        return
+      }
+
+      nextImage.classList.add("active")
+      currentImage.classList.remove("active")
+
+      if (this.options.isLoopMode) return
+
+      if (!nextImage.nextElementSibling) btnRight.setAttribute("disabled", "true")
+      else if (nextImage.nextElementSibling) btnRight.removeAttribute("disabled")
+
+      if (!nextImage.previousElementSibling) btnLeft.setAttribute("disabled", "true")
+      else if (nextImage.previousElementSibling) btnLeft.removeAttribute("disabled")
+    }
+
+    btnRight.addEventListener("click", () => switchImage("next"))
+    btnLeft.addEventListener("click", () => switchImage("previous"))
+  }
+
   get _selectPopupTypeHTML() {
     return {
       iframe: `<iframe ${
@@ -338,6 +396,11 @@ export default class PopupMedia {
         <source src="${this.options.url}" type="audio/mpeg"/>
       </audio>`,
       image: `<img src="${this.options.url}" class="box-item" />`,
+      gallery:
+        Array.isArray(this.options.url) &&
+        this.options.url
+          .map((url, idx) => `<img src="${url}" class="box-item ${idx === 0 ? "active" : ""}" />`)
+          .join("\n"),
     }
   }
 
@@ -350,9 +413,22 @@ export default class PopupMedia {
       this.options.isPlayInBackground ? "isPlayInBackground" : ""
     }" data-type="${this.options.type}">
               <div id="popup_body" class="body">
+                ${this.options.type === "gallery" ? this._generateGalleryStartHTML : ""}
                 ${this._selectPopupTypeHTML[this.options.type]}
-              </div>           
+                ${this.options.type === "gallery" ? this._generateGalleryEndHTML : ""}
+              </div>
             </div>`
+  }
+
+  get _generateGalleryStartHTML() {
+    return `<div class="popup-media-gallery">
+    <button type="button" class="popup-media-gallery-left">&#9001;</button>
+    <button type="button" class="popup-media-gallery-right">&#9001;</button>
+    <div class="popup-media-gallery-images">`
+  }
+
+  get _generateGalleryEndHTML() {
+    return `</div></div>`
   }
 
   get _generateBoxHeaderHTML() {
