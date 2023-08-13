@@ -1,7 +1,7 @@
 {
   "name": "popup-media",
-  "version": "4.0.0",
-  "description": "This Plugin based on JS. Also, support TS. This plugin can play medias with a beautiful modal.",
+  "version": "4.0.1",
+  "description": "This Plugin based on JavaScript. Also, support TypeScript. This plugin can play medias with a beautiful modal.",
   "main": "dist/index.js",
   "types": "dist/@types/index.d.ts",
   "scripts": {

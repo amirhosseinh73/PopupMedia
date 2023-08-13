@@ -6,6 +6,18 @@ npm package link: [click](https://www.npmjs.com/package/popup-media)
 
 github link: [click](https://github.com/amirhoseinh73/PopupJS)
 
+# New Features in Version 4
+
+- Added support for TypeScript.
+- Introduced a gallery mode to display multiple images with a fade effect.
+- Debugged various issues.
+
+  > Upcoming Features:
+
+  - New effects
+  - Show thumbnails for gallery mode
+  - ...
+
 ## Media Types
 
 - video: Play Video using HTML5
@@ -60,9 +72,13 @@ PopupMedia.run({
 This plugin supports TypeScript for recognizing types in your application. To enable type recognition, simply add the following lines to your tsconfig.json file:
 
 ```
-"paths": {
+{
+  "compilerOptions": {
+    "paths": {
       "popup-media": ["./node_modules/popup-media/dist"]
     }
+  }
+}
 ```
 
 ### **Config**
